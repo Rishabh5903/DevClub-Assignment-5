@@ -16,10 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from Grades import views as grade_view
+from django.conf import settings
+from django.conf.urls.static import static
 # from Documents import views as document_view
 urlpatterns = [
+    path('',include('Documents.urls')),
     path('',include('Quizzes.urls')),
     path('admin/', admin.site.urls),
     path('grades/', grade_view.index),
     # path('docs/', document_view.upload_file)
 ]
+urlpatterns += static(settings.STATIC_URL, document_root =settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root =settings.MEDIA_ROOT)
